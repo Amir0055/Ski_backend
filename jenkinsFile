@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    stages {
+        stage("Testing Maven"){
+            steps {
+                sh "mvn -version"
+            }
+        }
+        stage("Testing JDK"){
+            steps {
+                sh "java -version"
+            }
+        }
+        stage("Chekout Git"){
+            steps {
+                echo "Pulling"
+            }
+        }
+        stage('MVN COMPILE') {
+            steps{
+                 dir('Ski_backend') {
+                sh 'mvn compile'
+            }
+        }
+}
+    }
+}
