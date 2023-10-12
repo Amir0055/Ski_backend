@@ -18,9 +18,7 @@ pipeline{
         }
         stage('MVN COMPILE') {
             steps{
-                 dir('Ski_backend') {
                 sh 'mvn compile'
-            }
         }
 }
     }
