@@ -23,7 +23,7 @@ pipeline{
 }
  stage('MVN SONARQUBE') {
             steps{
-                sh 'mvn sonar:sonar'
+                sh 'mvn sonar:admin'
         }
 }
 
