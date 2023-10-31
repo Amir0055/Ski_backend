@@ -34,7 +34,7 @@ pipeline{
 }
     stage('Docker Image ') {
             steps{
-                sh 'docker build -t gestionSkiDevops .'
+                sh 'docker build -t gestion-station-ski-1.0 .'
         }
 }
 
