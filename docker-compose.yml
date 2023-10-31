@@ -1,9 +1,14 @@
 version: '3'
 services :
   app:
-    image: gestion-station-ski-1.0
+    image: nawresakri/gestion-station-ski-1.0:latest
     ports:
-     - 8080:8080
+     - 8089:8089
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/stationSki?createDatabaseIfNotExist=true"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: ""
+
     depends_on :
      - db
 
@@ -11,8 +16,9 @@ services :
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD:
-      MYSQL_DATABASE: stationSki
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
+      MYSQL_DATABASE: "stationSki"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
           - 3306:3306 # Port d'écoute de MySQL
+
+
