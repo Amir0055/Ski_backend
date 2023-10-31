@@ -70,6 +70,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>gestionSkiDevops</finalName>
 	</build>
 	<!-- Deploy to Nexus -->
 	<distributionManagement>

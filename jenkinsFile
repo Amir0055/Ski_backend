@@ -32,6 +32,11 @@ pipeline{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
 }
+    stage('Docker Image ') {
+            steps{
+                sh 'docker build -t gestionSkiDevops .'
+        }
+}
 
     }
 }
