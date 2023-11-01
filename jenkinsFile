@@ -33,5 +33,23 @@ pipeline{
         }
 }
 
+    stage('Docker Image ') {
+                steps{
+                    sh 'docker build -t hamzaamdouni/gestion-station-ski-1.0 .'
+            }
+    }
+        stage('Docker HUB') {
+                steps{
+                    sh 'docker login -u hamzaamdouni -p Docker2023'
+                    sh 'docker push hamzaamdouni/gestion-station-ski-1.0'
+            }
+    }
+        stage('Docker Compose') {
+                steps{
+                     sh 'docker compose up '
+
+            }
+    }
+
     }
 }
