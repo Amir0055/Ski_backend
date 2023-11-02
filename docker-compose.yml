@@ -1,0 +1,31 @@
+version: "3"
+services:
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:5.7
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: "stationSki"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - db:/var/lib/mysql
+
+  spring_app:
+    container_name: stationSki
+    image: khouloudaskri/gestion-station-ski-1.0:latest
+    restart: on-failure
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:mysql://mysqldb:3306/stationSki?createDatabaseIfNotExist=true"
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: ""
+    volumes:
+      - .m2:/root/.m2
+    ports:
+      - 8089:8089
+    depends_on:
+      - mysqldb
+
+volumes:
+  db:
