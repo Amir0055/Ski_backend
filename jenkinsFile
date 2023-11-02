@@ -32,5 +32,22 @@ pipeline{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
 }
+ stage('Docker Image ') {
+            steps{
+                sh 'docker build -t medamine47/gestion-station-ski-1.0 .'
+        }
+}
+    stage('Docker HUB') {
+            steps{
+                sh 'docker login -u medamine47 -p adminadmin'
+                sh 'docker push medamine47/gestion-station-ski-1.0'
+        }
+}
+    stage('Docker Compose') {
+            steps{
+                 sh 'docker compose up '
+
+        }
+}
     }
 }
