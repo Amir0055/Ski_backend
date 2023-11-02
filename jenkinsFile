@@ -31,5 +31,11 @@ pipeline{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
 }
+    stage('Docker HUB') {
+                    steps{
+                        sh 'docker login -u chedyakhichi -p chedyaKH005'
+                        sh 'docker push chedyakhichi/gestion-station-ski-1.0'
+                }
+        }
     }
 }
