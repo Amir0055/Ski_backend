@@ -32,6 +32,39 @@ pipeline{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
 }
+        stage('Build Docker Image Backend') {
+            steps {
+                script {
+                    sh "docker build -t amir005/backend ."
+                        }
+                    }
+    }
+        stage('Push Docker Image to Docker Hub') {
+      steps{
+                sh 'docker login -u amir005 -p amir55619255'
+                sh 'docker push amir005/backend'
+        }
 
+    }
+        stage('Verify Docker Compose Installation') {
+            steps {
+                sh 'docker compose version'
+                    }
+}
+
+        stage('Start Docker Compose') {
+            steps {
+                script {
+                    sh 'docker compose up -d'
+                    }
+                }
+            }
+        stage('check Docker Compose') {
+            steps {
+                script {
+                        sh 'docker compose ps'
+                    }
+                }
+            }
     }
 }
