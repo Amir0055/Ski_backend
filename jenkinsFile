@@ -32,11 +32,9 @@ pipeline{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
 }*/
-        stage('Build Docker Image Backend') {
+    /*    stage('Build Docker Image Backend') {
             steps {
-                script {
                     sh "docker build -t amir005/backend ."
-                        }
                     }
     }
         stage('Push Docker Image to Docker Hub') {
@@ -45,7 +43,7 @@ pipeline{
                 sh 'docker push amir005/backend'
         }
 
-    }
+    }*/
         stage('Verify Docker Compose Installation') {
             steps {
                 sh 'docker compose version'
@@ -54,16 +52,12 @@ pipeline{
 
         stage('Start Docker Compose') {
             steps {
-                script {
                     sh 'docker compose up -d'
-                    }
                 }
             }
         stage('check Docker Compose') {
             steps {
-                script {
-                        sh 'docker compose ps'
-                    }
+                    sh 'docker compose ps'
                 }
             }
     }
