@@ -27,7 +27,7 @@ pipeline{
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
             }
         }
-      stage('MVN Nexus') {
+      /*stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
@@ -42,12 +42,22 @@ pipeline{
                 sh 'docker login -u zoutchi -p zoutsh032003'
                 sh 'docker push zoutchi/gestion-station-ski-1.0'
         }
+}*/
+    stage('Verify Docker Compose Installation') {
+            steps {
+                sh 'docker compose version'
+                    }
 }
-    stage('Docker Compose') {
-            steps{
-                 sh 'docker compose up -d'
 
-        }
-}
+        stage('Start Docker Compose') {
+            steps {
+                    sh 'docker compose up -d'
+                }
+            }
+        stage('check Docker Compose') {
+            steps {
+                    sh 'docker compose ps'
+                }
+            }
     }
 }
