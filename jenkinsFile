@@ -27,11 +27,11 @@ pipeline{
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
             }
         }
-      stage('MVN Nexus') {
+     /* stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
-}
+}*/
     stage('Docker Image ') {
             steps{
                 sh 'docker build -t zoutchi/gestion-station-ski-1.0 .'
