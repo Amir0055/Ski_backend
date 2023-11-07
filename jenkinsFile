@@ -31,11 +31,33 @@ pipeline{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
 }
-    stage('Docker HUB') {
-                    steps{
-                        sh 'docker login -u chedyakhichi -p chedyaKH005'
-                        sh 'docker push chedyakhichi/gestion-station-ski-1.0'
-                }
+        stage('Build Docker Image Backend') {
+            steps {
+                    sh "docker build -t chedyakh/backend ."
+                    }
+    }
+        stage('Push Docker Image to Docker Hub') {
+      steps{
+                sh 'docker login -u chedyakh -p chedyaKH005'
+                sh 'docker push chedyakh/backend'
         }
+
+    }
+        stage('Verify Docker Compose Installation') {
+            steps {
+                sh 'docker compose version'
+                    }
+}
+
+        stage('Start Docker Compose') {
+            steps {
+                    sh 'docker compose up -d'
+                }
+            }
+        stage('check Docker Compose') {
+            steps {
+                    sh 'docker compose ps'
+                }
+            }
     }
 }
