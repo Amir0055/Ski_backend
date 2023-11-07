@@ -27,29 +27,37 @@ pipeline{
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
             }
         }
-      stage('MVN Nexus') {
+     /* stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
+}*/
+    stage('Docker Image ') {
+            steps{
+                sh 'docker build -t zoutchi/gestion-station-ski-1.0 .'
+        }
+}
+    stage('Docker HUB') {
+            steps{
+                sh 'docker login -u zoutchi -p zoutsh032003'
+                sh 'docker push zoutchi/gestion-station-ski-1.0'
+        }
+}
+    stage('Verify Docker Compose Installation') {
+            steps {
+                sh 'docker compose version'
+                    }
 }
 
-    stage('Docker Image ') {
-                steps{
-                    sh 'docker build -t zoutchi/gestion-station-ski-1.0 .'
+        stage('Start Docker Compose') {
+            steps {
+                    sh 'docker compose up -d'
+                }
             }
-    }
-        stage('Docker HUB') {
-                steps{
-                    sh 'docker login -u zoutchi -p zoutsh032003'
-                    sh 'docker push zoutchi/gestion-station-ski-1.0'
+        stage('check Docker Compose') {
+            steps {
+                    sh 'docker compose ps'
+                }
             }
-    }
-        stage('Docker Compose') {
-                steps{
-                     sh 'docker compose up '
-
-            }
-    }
-
     }
 }
