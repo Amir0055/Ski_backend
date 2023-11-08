@@ -1,17 +1,5 @@
 version: "3"
 services:
-  prometheus:
-    image: prom/prometheus:v2.35.0
-    network_mode: host
-    container_name: prometheus1
-    restart: unless-stopped
-    volumes:
-      -  ./data/prometheus/config:/etc/prometheus/
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-    ports:
-      - 9090:9090
-
   mysqldb:
     container_name: mysqldb
     image: mysql:5.7
