@@ -49,7 +49,7 @@ pipeline{
 
         }
 }
-    }
+
 
   stage('Email Notification') {
             steps {
@@ -67,7 +67,7 @@ pipeline{
                 }
             }
         }
-
+    }
         post {
                 success {
                     emailext(
