@@ -24,9 +24,10 @@ pipeline{
     stage('MVN SONARQUBE') {
             steps{
 
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.1.3:9000'
             }
         }
+
       stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -Dmaven.test.skip=true'
