@@ -50,4 +50,38 @@ pipeline{
         }
 }
     }
+
+  stage('Email Notification') {
+            steps {
+                script {
+                    try {
+                        emailext (
+                            subject: "Jenkins Job - ${currentBuild.result}",
+                            body: "This is the email body.",
+                            to: "khouloud.askri@esprit.tn",
+                        )
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        throw e
+                    }
+                }
+            }
+        }
+    }
+        post {
+                success {
+                    emailext(
+                        subject: "Build Successful: Build #${currentBuild.number}",
+                        body: "The build was successful. Build number: ${currentBuild.number}",
+                        to: 'khouloud.askri@esprit.tn'
+                    )
+                }
+                failure {
+                    emailext(
+                        subject: "Build Failed: Build #${currentBuild.number}",
+                        body: "The build has failed. Build number: ${currentBuild.number}",
+                        to: 'khouloud.askri@esprit.tn'
+                    )
+                }
+            }
 }
