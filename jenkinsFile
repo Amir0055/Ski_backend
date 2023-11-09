@@ -1,63 +1,59 @@
-pipeline{
+pipeline {
     agent any
     stages {
-        stage("Testing Maven"){
+        stage("Testing Maven") {
             steps {
                 sh "mvn -version"
             }
         }
-        stage("Testing JDK"){
+        stage("Testing JDK") {
             steps {
                 sh "java -version"
             }
         }
-        stage("Chekout Git"){
+        stage("Checkout Git") {
             steps {
                 echo "Pulling"
             }
         }
-        stage('MVN COMPILE') {
-            steps{
-                sh 'mvn compile'
-        }
-}
-    stage('MVN SONARQUBE') {
-            steps{
-
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
-            }
-        }
-      stage('MVN Nexus') {
-            steps{
-                sh 'mvn deploy -Dmaven.test.skip=true'
-        }
-}
-    stage('Docker Image ') {
-            steps{
-                sh 'docker build -t zoutchi/gestion-station-ski-1.0 .'
-        }
-}
-    stage('Docker HUB') {
-            steps{
-                sh 'docker login -u zoutchi -p zoutsh032003'
-                sh 'docker push zoutchi/gestion-station-ski-1.0'
-        }
-}
-    stage('Verify Docker Compose Installation') {
+        stage('Build and Analyze Code') {
             steps {
-                sh 'docker compose version'
-                    }
-}
+                script {
+                    // Compilation Maven
+                    sh 'mvn compile'
 
-        stage('Start Docker Compose') {
-            steps {
-                    sh 'docker compose up -d'
+                    // Analyse SonarQube
+                    sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.1.3:9000'
                 }
             }
-        stage('check Docker Compose') {
+        }
+        stage('Deploy to Nexus') {
             steps {
+                sh 'mvn deploy -DskipTests'
+            }
+        }
+        stage('Build and Push Docker Image') {
+            steps {
+                script {
+                    sh 'docker build -t zoutchi/gestion-station-ski-1.0 .'
+                    sh 'docker login -u zoutchi -p zoutsh032003'
+                    sh 'docker push zoutchi/gestion-station-ski-1.0'
+                }
+            }
+        }
+        stage('Verify Docker Compose Installation') {
+            steps {
+                sh 'docker compose version'
+            }
+        }
+        stage('Start and Check Docker Compose') {
+            steps {
+                script {
+                    // Vérifier et démarrer Docker Compose
+                    sh 'docker compose up -d'
                     sh 'docker compose ps'
                 }
             }
+        }
     }
 }
