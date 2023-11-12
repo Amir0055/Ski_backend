@@ -77,9 +77,14 @@ pipeline {
 
         stage('Monitoring with Prometheus and Grafana') {
             steps {
-                echo "Monitoring with Prometheus and Grafana"
-                // Add commands to set up monitoring using Prometheus and Grafana
-            }
+        echo "Monitoring with Prometheus and Grafana"
+
+        // Configure Prometheus data source in Grafana
+        sh 'curl -X POST -H "Content-Type: application/json" -d "{\"name\":\"Prometheus\",\"type\":\"prometheus\",\"url\":\"http://prometheus:9090\",\"access\":\"proxy\"}" http://admin:admin@localhost:3000/api/datasources'
+
+        // Import Grafana dashboard for Spring Boot Actuator metrics (customize the URL)
+        sh 'curl -X POST -H "Content-Type: application/json" -d "{\"dashboard\": \"https://grafana.com/api/dashboards/6756/revisions/2/download\",\"inputs\": [{\"name\": \"DS_PROMETHEUS\", \"type\": \"datasource\", \"pluginId\": \"prometheus\", \"value\": \"Prometheus\"}] }" http://admin:admin@localhost:3000/api/dashboards/import'
+    }
         }
     }
 
