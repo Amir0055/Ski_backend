@@ -52,11 +52,26 @@ pipeline {
         }
 
         stage('Run Docker Compose') {
-            steps {
-                echo "Running Docker Compose"
-                sh 'docker-compose up -d'
-            }
-        }
+    steps {
+        echo "Running Docker Compose"
+        sh 'docker-compose up -d'
+    }
+}
+
+stage('Wait for Docker Containers') {
+    steps {
+        echo "Waiting for Docker containers to start"
+        sh 'sleep 30'
+    }
+}
+
+stage('Show Docker Logs') {
+    steps {
+        echo "Showing Docker logs"
+        sh 'docker-compose logs'
+        // or sh 'docker logs <container_name>'
+    }
+}
 
         stage('Test Services with Swagger') {
             steps {
