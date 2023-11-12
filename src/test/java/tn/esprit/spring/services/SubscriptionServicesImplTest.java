@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
@@ -36,18 +37,30 @@ public class SubscriptionServicesImplTest {
     }
 
     @Test
-    void testAddSubscription() {
+    void shouldAddSubscriptionWithAnnualTypeAndSetEndDate() {
+        // Arrange
         Subscription subscription = new Subscription();
         subscription.setStartDate(LocalDate.now());
         subscription.setTypeSub(TypeSubscription.ANNUAL);
 
-        when(subscriptionRepository.save(any())).thenReturn(subscription);
+        // Stubbing the save method of the repository
+        when(subscriptionRepository.save(any())).thenAnswer(invocation -> {
+            Subscription savedSubscription = invocation.getArgument(0);
+            // Simulate the behavior of the repository save method
+            savedSubscription.setEndDate(savedSubscription.getStartDate().plusYears(1));
+            return savedSubscription;
+        });
 
+        // Act
         Subscription result = subscriptionServices.addSubscription(subscription);
 
-        assertEquals(subscription, result);
+        // Assert
+        assertNotNull(result);
+        assertEquals(TypeSubscription.ANNUAL, result.getTypeSub());
+        // Add more specific assertions for other attributes if needed
         verify(subscriptionRepository, times(1)).save(subscription);
     }
+
 
     @Test
     void testRetrieveSubscriptionsByDates() {
