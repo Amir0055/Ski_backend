@@ -4,8 +4,7 @@ pipeline {
         stage('Checkout from Git') {
             steps {
                 echo "Checking out code from Git"
-                // Replace the repository URL with your actual Git repository URL
-                git 'https://github.com/Amir0055/Ski_backend'
+                echo "Pulling"
             }
         }
 
