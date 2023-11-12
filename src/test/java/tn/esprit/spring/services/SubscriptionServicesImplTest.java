@@ -55,9 +55,11 @@ public class SubscriptionServicesImplTest {
         Subscription result = subscriptionServices.addSubscription(subscription);
 
         // Assert
-        assertNotNull(result);
-        assertEquals(TypeSubscription.ANNUAL, result.getTypeSub());
+        assertNotNull(String.valueOf(result), "The result of addSubscription should not be null");
+        assertEquals(TypeSubscription.ANNUAL, result.getTypeSub(), "The subscription type should be ANNUAL");
         // Add more specific assertions for other attributes if needed
+
+        // Verify that the save method of the repository was called once with the correct subscription
         verify(subscriptionRepository, times(1)).save(subscription);
     }
 
