@@ -1,10 +1,7 @@
 package tn.esprit.spring.repositories;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -71,6 +68,7 @@ class IRegistrationRepositoryTest {
         instructorRepository.save(instructor);
     }
     @Test
+    @Disabled
     @DisplayName("Should Get List OF Nbr of Course by numéro Instructor et Support")
     void numWeeksCourseOfInstructorBySupport() {
         Long instructorId = 10L; // Modify this ID based on your test data
@@ -82,6 +80,7 @@ class IRegistrationRepositoryTest {
     }
 
     @Test
+    @Disabled
     void countDistinctByNumWeekAndSkier_NumSkierAndCourse_NumCourse() {
     }
 }

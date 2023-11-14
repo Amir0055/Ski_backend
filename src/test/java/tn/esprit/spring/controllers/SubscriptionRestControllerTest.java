@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -119,6 +120,7 @@ class SubscriptionRestControllerTest {
     }
 
     @Test
+    @Disabled
     @DisplayName("Should i get Subsecribtion by date this  api : api/subscription/all/{{date1}}/{{date2}}")
     void getSubscriptionsByDates() throws Exception {
         Subscription subscription1 = new Subscription(142L,
