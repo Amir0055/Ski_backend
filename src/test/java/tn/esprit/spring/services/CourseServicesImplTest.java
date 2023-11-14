@@ -17,9 +17,9 @@ class CourseServicesImplTest {
 
     @Autowired
     CourseRestController courseRestController;
-@Autowired
+    @Autowired
     CourseServicesImpl courseServices;
-@Autowired
+    @Autowired
     ICourseRepository courseRepository;
 
 

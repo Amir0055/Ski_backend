@@ -3,6 +3,8 @@ package tn.esprit.spring.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.spring.entities.Subscription;
 import tn.esprit.spring.entities.TypeSubscription;
@@ -42,10 +44,10 @@ public class SubscriptionRestController {
         return  subscriptionServices.updateSubscription(subscription);
     }
     @Operation(description = "Retrieve Subscriptions created between two dates")
-    @GetMapping("/all/{date1}/{date2}")
+    @GetMapping(value = "/all/{date1}/{date2}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Subscription> getSubscriptionsByDates(@PathVariable("date1") LocalDate startDate,
                                                       @PathVariable("date2") LocalDate endDate){
-        return subscriptionServices.retrieveSubscriptionsByDates(startDate, endDate);
+        return  subscriptionServices.retrieveSubscriptionsByDates(startDate, endDate) ;
     }
 
 }

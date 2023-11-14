@@ -19,17 +19,17 @@ public class Course implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	Long numCourse;
-	int level;
+	private Long numCourse;
+	private int level;
 	@Enumerated(EnumType.STRING)
-	TypeCourse typeCourse;
+	private TypeCourse typeCourse;
 	@Enumerated(EnumType.STRING)
-	Support support;
-	Float price;
-	int timeSlot;
+	private Support support;
+	private Float price;
+	private int timeSlot;
 
 	@JsonIgnore
 	@OneToMany(mappedBy= "course")
-	Set<Registration> registrations;
+	private Set<Registration> registrations;
 
 }
