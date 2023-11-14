@@ -16,9 +16,9 @@ pipeline{
                 echo "Pulling"
             }
         }
-        stage('MVN COMPILE') {
+        stage('MVN CLEAN COMPILE') {
             steps{
-                sh 'mvn compile'
+                sh 'mvn clean compile'
         }
 }
         stage('Tests JUnit/Mockito') {
@@ -26,18 +26,23 @@ pipeline{
                  sh 'mvn test'
         }
 }
+         stage('MVN Install') {
+            steps {
+            sh 'mvn install'
+            }
+}
     stage('MVN SONARQUBE') {
             steps{
                 
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.43.20:9000'
             }
         }
-    /*  stage('MVN Nexus') {
+      stage('MVN Nexus') {
             steps{
-                sh 'mvn deploy -Dmaven.test.skip=true'
+                sh 'mvn deploy -DskipTests'
         }
-}*/
-    /*    stage('Build Docker Image Backend') {
+}
+    stage('Build Docker Image Backend') {
             steps {
                     sh "docker build -t amir005/backend ."
                     }
@@ -48,7 +53,7 @@ pipeline{
                 sh 'docker push amir005/backend'
         }
 
-    }*/
+    }
         stage('Verify Docker Compose Installation') {
             steps {
                 sh 'docker compose version'
