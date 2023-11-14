@@ -79,7 +79,7 @@ class SubscriptionRestControllerTest {
         // Act and Assert
         mockMvc.perform(MockMvcRequestBuilders.get("/subscription/get/{id-subscription}", subscriptionId))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.numSub", Matchers.equalTo(1L)));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.numSub").value(1L));
         // Optionally, you can verify that the service method was called with the correct argument
         verify(subscriptionServices, times(1)).retrieveSubscriptionById(subscriptionId);
 
