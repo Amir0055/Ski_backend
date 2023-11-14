@@ -21,5 +21,44 @@ pipeline{
                 sh 'mvn compile'
         }
 }
+    stage('MVN SONARQUBE') {
+            steps{
+                
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.43.20:9000'
+            }
+        }
+    /*  stage('MVN Nexus') {
+            steps{
+                sh 'mvn deploy -Dmaven.test.skip=true'
+        }
+}*/
+    /*    stage('Build Docker Image Backend') {
+            steps {
+                    sh "docker build -t amir005/backend ."
+                    }
+    }
+        stage('Push Docker Image to Docker Hub') {
+      steps{
+                sh 'docker login -u amir005 -p amir55619255'
+                sh 'docker push amir005/backend'
+        }
+
+    }*/
+        stage('Verify Docker Compose Installation') {
+            steps {
+                sh 'docker compose version'
+                    }
+}
+
+        stage('Start Docker Compose') {
+            steps {
+                    sh 'docker compose up -d'
+                }
+            }
+        stage('check Docker Compose') {
+            steps {
+                    sh 'docker compose ps'
+                }
+            }
     }
 }
