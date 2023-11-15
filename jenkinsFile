@@ -41,7 +41,33 @@ pipeline{
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
             }
         }
-
+    stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Apply Kubernetes manifests
+                    sh 'kubectl apply -f deployment.yaml'
+                }
+            }
+        }
+        
+        stage('Check Deployment') {
+            steps {
+                script {
+                    // Check the status of the deployment
+                    sh 'kubectl get deployments'
+                }
+            }
+        }
+        
+        stage('Check Service') {
+            steps {
+                script {
+                    // Check the status of the service
+                    sh 'kubectl get services'
+                }
+            }
+        }
+        
       stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -Dmaven.test.skip=true'
