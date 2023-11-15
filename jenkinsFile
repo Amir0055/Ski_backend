@@ -36,7 +36,7 @@ pipeline{
             steps{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
-} /*
+} 
         stage('Build Docker Image Backend') {
             steps {
                     sh "docker build -t chedyakh/backend ."
@@ -48,13 +48,7 @@ pipeline{
                 sh 'docker push chedyakh/backend'
         }
 
-    } */
-        stage('Verify Docker Compose Installation') {
-            steps {
-                sh 'docker compose version'
-                    }
-}
-
+    } 
         stage('Start Docker Compose') {
             steps {
                     sh 'docker compose up -d'
