@@ -47,5 +47,10 @@ public class InstructorServicesImpl implements IInstructorServices{
         return instructorRepository.save(instructor);
     }
 
+    @Override
+    public void removeInstructor(Long numInstructor) {
+        instructorRepository.deleteById(numInstructor);
+    }
+
 
 }
