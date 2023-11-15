@@ -17,9 +17,9 @@ pipeline{
             }
         }
 
-        stage('MVN COMPILE') {
+      stage('MVN CLEAN COMPILE') {
             steps{
-                sh 'mvn compile'
+                sh 'mvn clean compile'
         }
 }
       stage('Tests JUnit/Mockito') {
@@ -27,12 +27,19 @@ pipeline{
                  sh 'mvn test'
         }
 }
+        stage('MVN Install') {
+            steps {
+            sh 'mvn install'
+            }
+}
+
     stage('MVN SONARQUBE') {
             steps{
                   sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=123456'
             }
         }
-      stage('MVN Nexus') {
+    
+     stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
