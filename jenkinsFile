@@ -16,9 +16,14 @@ pipeline{
                 echo "Pulling"
             }
         }
-        stage('MVN CLEAN COMPILE') {
+        stage('MVN CLEAN ') {
             steps{
-                sh 'mvn clean compile'
+                sh 'mvn clean'
+        }
+}
+    stage('MVN  COMPILE') {
+            steps{
+                sh 'mvn compile'
         }
 }
         stage('Tests JUnit/Mockito') {
