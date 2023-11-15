@@ -29,6 +29,18 @@ services:
       - mysqldb  # Ensure the MySQL service is started before the application
     volumes:
       - app_data:/app/data
+  front-app:
+    image: bayoudhhazem/devops_project:frontApp
+    container_name: angular-front-project
+    ports:
+      - "4200:80"
+    depends_on:
+      - DevOps_Project
+      # networks:
+      # - my-network
+    volumes:
+      - ./frontend-data:/app/dist
+    restart: always
 volumes:
     app_data:  # Define the app_data volume
     db:
