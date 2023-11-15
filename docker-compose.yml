@@ -30,12 +30,12 @@ services:
     volumes:
       - app_data:/app/data
   front-app:
-    image: bayoudhhazem/devops_project:frontApp
+    image: amir005/backend:frontApp
     container_name: angular-front-project
     ports:
       - "4200:80"
     depends_on:
-      - DevOps_Project
+      - stationSki
       # networks:
       # - my-network
     volumes:
