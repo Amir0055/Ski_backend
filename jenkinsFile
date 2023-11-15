@@ -42,7 +42,7 @@ pipeline{
                 sh 'mvn deploy -DskipTests'
         }
 }*/
-    stage('Build Docker Image Backend') {
+   /* stage('Build Docker Image Backend') {
             steps {
                     sh "docker build -t amir005/backend ."
                     }
@@ -58,7 +58,7 @@ pipeline{
             steps {
                 sh 'docker compose version'
                     }
-}
+}*/
 
 //Front
 stage('Build Front') {
