@@ -32,11 +32,11 @@ pipeline{
                   sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=123456'
             }
         }
-     /* stage('MVN Nexus') {
+      stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -Dmaven.test.skip=true'
         }
-} */
+} /*
         stage('Build Docker Image Backend') {
             steps {
                     sh "docker build -t chedyakh/backend ."
@@ -48,7 +48,7 @@ pipeline{
                 sh 'docker push chedyakh/backend'
         }
 
-    }
+    }*/
         stage('Verify Docker Compose Installation') {
             steps {
                 sh 'docker compose version'
