@@ -60,7 +60,7 @@ pipeline{
                 emailext(
                     subject: "Build Failed: Build #${currentBuild.number}",
                     body: "The build has failed. Build number: ${currentBuild.number}",
-                    to: 'khouloud.askri@esprit.tn'
+                    to: 'nawres.askri@esprit.tn'
                 )
             }
         }
