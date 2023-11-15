@@ -11,6 +11,4 @@ import java.util.List;
 
 public interface ICourseRepository extends JpaRepository<Course, Long> {
 
-
-
 }
