@@ -27,8 +27,16 @@ public class PisteServicesImpl implements  IPisteServices{
         pisteRepository.deleteById(numPiste);
     }
 
+   // @Override
+    //public Piste retrievePiste(Long numPiste) {
+       // return pisteRepository.findById(numPiste).orElse(null);
+    //}
+
+
     @Override
     public Piste retrievePiste(Long numPiste) {
-        return pisteRepository.findById(numPiste).orElse(null);
+        return pisteRepository.findById(numPiste)
+                .orElseThrow(() -> new IllegalArgumentException("Piste not found with id: " + numPiste));
     }
+
 }
