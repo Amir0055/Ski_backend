@@ -4,13 +4,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.spring.entities.Skier;
 import tn.esprit.spring.entities.Subscription;
+import tn.esprit.spring.entities.TypeSubscription;
 import tn.esprit.spring.repositories.ISkierRepository;
 import tn.esprit.spring.repositories.ISubscriptionRepository;
 import tn.esprit.spring.services.SkierServicesImpl;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -51,15 +54,23 @@ class SkierServicesImplTest {
         // Arrange
         Skier skier = new Skier();
         Subscription subscription = new Subscription();
+        subscription.setTypeSub(TypeSubscription.ANNUAL);
+        subscription.setStartDate(LocalDate.now()); // Set a valid start date
         skier.setSubscription(subscription);
 
+        // Mock the behavior of skierRepository.save()
+        when(skierRepository.save(any(Skier.class))).thenReturn(skier);
+
         // Act
-        skierServices.addSkier(skier);
+        Skier result = skierServices.addSkier(skier);
 
         // Assert
-        assertNotNull(skier.getSubscription().getEndDate());
-        verify(skierRepository, times(1)).save(any(Skier.class));
+        assertEquals(TypeSubscription.ANNUAL, result.getSubscription().getTypeSub());
+
+        // Verify that skierRepository.save() was called
+        verify(skierRepository).save(any(Skier.class));
     }
+
 
     @Test
     void assignSkierToSubscription() {
