@@ -16,15 +16,20 @@ pipeline{
                 echo "Pulling"
             }
         }
-        stage('MVN COMPILE') {
+        stage('MVN CLEAN COMPILE') {
             steps{
-                sh 'mvn compile'
+                sh 'mvn clean compile'
         }
 }
-  stage('Tests JUnit/Mockito') {
+        stage('Tests JUnit/Mockito') {
                 steps {
                  sh 'mvn test'
         }
+}
+         stage('MVN Install') {
+            steps {
+            sh 'mvn install'
+            }
 }
     stage('MVN SONARQUBE') {
             steps{
