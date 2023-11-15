@@ -48,7 +48,7 @@ pipeline{
                 sh 'docker push chedyakh/backend'
         }
 
-    }*/
+    } */
         stage('Verify Docker Compose Installation') {
             steps {
                 sh 'docker compose version'
