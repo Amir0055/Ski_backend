@@ -1,0 +1,94 @@
+<!-- subscription.component.html -->
+<header>
+  <!-- Your application branding or navigation elements go here -->
+
+  <!-- Search options -->
+  <div class="search-options">
+    <!-- Include your existing search forms here -->
+    <div class="flex-container">
+    <div>
+        <!--<h2>Search For Subscriptions</h2>
+        <form  (submit)="getSubscriptionsByDates(startDateInput.value, endDateInput.value)">
+          <label for="startDate">Start Date:</label>
+          <input type="date" id="startDate" #startDateInput required>
+    
+          <label for="endDate">End Date:</label>
+          <input type="date" id="endDate" #endDateInput required>
+    
+          <button type="submit" >Get Subscriptions</button>
+        </form>-->
+      
+      </div>
+    
+      <div class="inner-div">
+        <form class="searchform cf" (submit)="getSubscriptionsByType(typeInput.value)" >
+          <input  type="text" placeholder="Is it me you’re looking for?" #typeInput>
+          <button type="submit">Search</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</header>
+<br>
+<br>  
+<br>  
+<br>  
+<br>  
+<div class="subscription-form">
+  <h2>Add Subscription</h2>
+  <form (submit)="onSubmit()">
+    <label for="numSub">Subscription Number:</label>
+    <input type="number" id="numSub" name="numSub" [(ngModel)]="newSubscription.numSub" required>
+
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" [(ngModel)]="newSubscription.startDate" required>
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" [(ngModel)]="newSubscription.endDate" required>
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" [(ngModel)]="newSubscription.price" required>
+
+    <label for="typeSub">Type:</label>
+    <input type="text" id="typeSub" name="typeSub" [(ngModel)]="newSubscription.typeSub" required>
+
+    <button type="submit">Add and Update</button>
+  </form>
+</div>
+<!-- subscription.component.html -->
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div id="searchUsers" class="instant-search">
+  <div class="instant-search__input-container">
+    <input class="instant-search__input" type="date" spellcheck="false" #startDateInput placeholder="Search Users">
+    <input class="instant-search__input" type="date" spellcheck="false" #endDateInput placeholder="Search Users">
+    <i class="material-icons instant-search__icon" (click)="getSubscriptionsByDates(startDateInput.value, endDateInput.value)">search</i>
+  </div>
+</div>
+
+<div *ngIf="subscriptionsByDates.length > 0">
+  <h2>Subscriptions by Dates</h2>
+  <ul class="subscription-list">
+    <div *ngFor="let subscription of subscriptionsByDates">
+      <div class="card">
+        <div class="main-content">
+          <div class="header">
+        <span>TYPE :</span>
+       
+      </div>
+      <span>{{subscription.typeSub}} </span>
+      <p class="heading">{{subscription.startDate}} -- {{subscription.endDate}} </p>
+      <div class="categories">
+        <span (click)="retrieveSubscriptionById(subscription.numSub)">SHOW DETAILS</span>
+        <span (click)="SetElementForUpdate(subscription)">UPDATE</span>
+      </div>
+        </div>
+      <div class="footer">
+        PRICE :{{subscription.price}} $
+      </div>
+      </div>
+    </div>
+  </ul>
+</div>
