@@ -66,12 +66,7 @@ pipeline {
                 echo "Testing services with Swagger"
 
                 // Exemple de test d'ajout d'abonnement
-                sh 'curl -X POST -H "Content-Type: application/json" -d \'{"numCourse": 1,
-                                                                               "level": 0,
-                                                                               "typeCourse": "COLLECTIVE_CHILDREN",
-                                                                               "support": "SKI",
-                                                                               "price": 0,
-                                                                               "timeSlot": 0}\' http://192.168.1.3:8089/api/course/add'
+                sh 'curl -X POST -H "Content-Type: application/json" -d \'{"numCourse": 1,"level": 0,"typeCourse": "COLLECTIVE_CHILDREN","support": "SKI","price": 0,"timeSlot": 0}\' http://192.168.1.3:8089/api/course/add'
 
                 // Exemple de test de récupération d'un abonnement par ID
 
