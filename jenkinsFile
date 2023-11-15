@@ -48,4 +48,20 @@ pipeline{
                         }
                 }
     }
+    post {
+            success {
+                emailext(
+                    subject: "Build Successful: Build #${currentBuild.number}",
+                    body: "The build was successful. Build number: ${currentBuild.number}",
+                    to: 'khouloud.askri@esprit.tn'
+                )
+            }
+            failure {
+                emailext(
+                    subject: "Build Failed: Build #${currentBuild.number}",
+                    body: "The build has failed. Build number: ${currentBuild.number}",
+                    to: 'khouloud.askri@esprit.tn'
+                )
+            }
+        }
 }
