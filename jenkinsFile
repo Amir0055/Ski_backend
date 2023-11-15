@@ -21,6 +21,12 @@ pipeline{
                 sh 'mvn compile'
         }
 }
+stage('JUNIT / Mockito') {
+            steps {
+                // Run JUnit and Mockito tests using Maven
+                sh 'mvn test'
+            }
+        }
     stage('MVN SONARQUBE') {
             steps{
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
@@ -47,6 +53,7 @@ pipeline{
                                 sh 'docker-compose up -d'
                         }
                 }
+
     }
     post {
             success {
