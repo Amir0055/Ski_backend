@@ -6,7 +6,7 @@ import { Subscription } from '../Models/Subscription ';
   providedIn: 'root'
 })
 export class SubscriptionService {
-  private baseUrl = 'http://localhost:8089/api/subscription'; // Update with your API base URL
+  private baseUrl = 'http://192.168.1.21:8089/api/subscription'; // Update with your API base URL
 
   constructor(private http: HttpClient) {}
 
