@@ -61,7 +61,7 @@ pipeline{
 }*/
 
 //Front
-/*stage('Docker Image Build - Frontend') {
+stage('Docker Image Build - Frontend') {
             steps {
                 script {
                      dir('FrontSki') {
@@ -80,7 +80,7 @@ pipeline{
             }
         }
     }
-}*/
+}
 
   stage('Start Docker Compose') {
             steps {
