@@ -16,7 +16,7 @@ pipeline{
                 echo "Pulling"
             }
         }
-        /*stage('MVN CLEAN COMPILE') {
+        stage('MVN CLEAN COMPILE') {
             steps{
                 sh 'mvn clean compile'
         }
@@ -25,13 +25,13 @@ pipeline{
                 steps {
                  sh 'mvn test'
         }
-        }*/
+        }
          stage('MVN Install') {
             steps {
             sh 'mvn install'
             }
 }
-/*stage('MVN SONARQUBE') {
+stage('MVN SONARQUBE') {
             steps{
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.33.27:9000'
             }
@@ -58,10 +58,10 @@ pipeline{
             steps {
                 sh 'docker compose version'
                     }
-}*/
+}
 
 //Front
-stage('Docker Image Build - Frontend') {
+/*stage('Docker Image Build - Frontend') {
             steps {
                 script {
                      dir('FrontSki') {
@@ -91,6 +91,6 @@ stage('Docker Image Build - Frontend') {
             steps {
                     sh 'docker compose ps'
                 }
-            }
+            }*/
     }
 }
