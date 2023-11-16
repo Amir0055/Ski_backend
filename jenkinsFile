@@ -61,14 +61,6 @@ pipeline{
 }*/
 
 //Front
-stage('Build Front') {
-    steps {
-        dir('FrontSki') {
-                        sh 'npm install'
-                        sh 'npm run build'
-                    }
-    }
-}
 stage('Docker Image Build - Frontend') {
             steps {
                 script {
