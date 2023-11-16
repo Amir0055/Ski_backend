@@ -114,7 +114,7 @@ pipeline {
                                         <p>Check the <a href="${BUILD_URL}">console output</a>.</p>
                                 </body>
                             </html>''',
-                    to:'sbaih238@gmail.com',
+                    to:'amdounii.hamza@gmail.com',
                     from: 'jenkins@example.com',
                     replyTo: 'jenkins@example.com',
                     mimeType:'text/html'
@@ -122,66 +122,3 @@ pipeline {
     }
     }
 }
-
-
-
-/* pipeline {
-    agent any
-    stages {
-        stage("Testing Maven") {
-            steps {
-                sh "mvn -version"
-            }
-        }
-        stage("Testing JDK") {
-            steps {
-                sh "java -version"
-            }
-        }
-        stage("Checkout Git") {
-            steps {
-                echo "Pulling"
-            }
-        }
-        stage('Build and Analyze Code') {
-            steps {
-                script {
-                    // Compilation Maven
-                    sh 'mvn compile'
-
-                    // Analyse SonarQube
-                    sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.1.3:9000'
-                }
-            }
-        }
-        stage('Deploy to Nexus') {
-            steps {
-                sh 'mvn deploy -DskipTests'
-            }
-        }
-        stage('Build and Push Docker Image') {
-            steps {
-                script {
-                    sh 'docker build -t zoutchi/gestion-station-ski-1.0 .'
-                    sh 'docker login -u zoutchi -p zoutsh032003'
-                    sh 'docker push zoutchi/gestion-station-ski-1.0'
-                }
-            }
-        }
-        stage('Verify Docker Compose Installation') {
-            steps {
-                sh 'docker compose version'
-            }
-        }
-        stage('Start and Check Docker Compose') {
-            steps {
-                script {
-                    // Vérifier et démarrer Docker Compose
-                    sh 'docker compose up -d'
-                    sh 'docker compose ps'
-                }
-            }
-        }
-    }
-}
-*/
