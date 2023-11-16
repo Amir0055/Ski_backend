@@ -37,11 +37,11 @@ stage('MVN SONARQUBE') {
             }
         }
 
-     /* stage('MVN Nexus') {
+      stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -DskipTests'
         }
-}*/
+}
     stage('Build Docker Image Backend') {
             steps {
                     sh "docker build -t amir005/backend ."
