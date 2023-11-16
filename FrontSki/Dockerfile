@@ -19,7 +19,7 @@ RUN npm ci
 COPY . .
 
 # Build the Angular application
-RUN npm run build --prod
+RUN ng build --configuration=production --output-path=dist
 
 # Expose port 4200
 EXPOSE 4200
