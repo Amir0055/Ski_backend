@@ -81,7 +81,7 @@ stage('MVN SONARQUBE') {
         }
     }
 }
-
+*/
   stage('Start Docker Compose') {
             steps {
                     sh 'docker compose up -d'
@@ -91,6 +91,6 @@ stage('MVN SONARQUBE') {
             steps {
                     sh 'docker compose ps'
                 }
-            }*/
+            }
     }
 }
