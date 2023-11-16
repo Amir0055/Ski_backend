@@ -35,7 +35,7 @@ services:
     ports:
       - "4200:80"
     depends_on:
-      - stationSki
+      - app
       # networks:
       # - my-network
     volumes:
