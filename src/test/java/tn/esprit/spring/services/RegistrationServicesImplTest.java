@@ -86,7 +86,7 @@ class RegistrationServicesImplTest {
 
     @Test
     void addRegistrationAndAssignToSkierAndCourse() {
-    /*  // Create sample data
+      // Create sample data
         Registration registration = new Registration();
         Long numSkieur = 1L; // Replace with a valid skier ID
         Long numCours = 1L; // Replace with a valid course ID
@@ -120,7 +120,7 @@ class RegistrationServicesImplTest {
         Mockito.verify(courseRepository, Mockito.times(1)).findById(numCours);
         Mockito.verify(registrationRepository, Mockito.times(1)).countDistinctByNumWeekAndSkier_NumSkierAndCourse_NumCourse(Mockito.anyInt(), Mockito.anyLong(), Mockito.anyLong());
         Mockito.verify(registrationRepository, Mockito.times(1)).countByCourseAndNumWeek(Mockito.any(Course.class), Mockito.anyInt());
-*/
+
     }
 
 
