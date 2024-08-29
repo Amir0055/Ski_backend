@@ -21,8 +21,7 @@ coverage/
 target/
 
 # Docker
-!Dockerfile
-!docker-compose.yml
+
 # Exclude local override file if used
 # docker-compose.override.yml
 
