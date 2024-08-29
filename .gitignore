@@ -1,4 +1,4 @@
-HELP.md
+# Ignore general files
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Exclude Docker files if already excluded
+!Dockerfile
+!docker-compose.yml
