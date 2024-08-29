@@ -1,18 +1,25 @@
 ## Build Stage
 FROM node:18.13 AS build
 
-WORKDIR /app
-COPY package*.json /app/
+RUN mkdir -p /usr/src/app
 
-## Install Angular CLI globally
-RUN npm install -g @angular/cli@latest
+# Set the working directory to the app directory
+WORKDIR /usr/src/app
 
+# Copy the package.json and package-lock.json files
+COPY package*.json ./
+
+# Install Angular CLI globally (you can also install it locally)
+RUN npm install -g @angular/cli
 ## Install dependencies
 RUN npm install --legacy-peer-deps
+# Install project dependencies
+RUN npm ci
 
-COPY ./ /app/
+# Copy the rest of the application source code
+COPY . .
 
-## Run the build using the Angular CLI
+# Build the Angular application
 RUN ng build --configuration=production --output-path=dist
 
 ## Production Stage
@@ -24,6 +31,8 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 ## Copy the built files from the previous stage into the NGINX server
 COPY --from=build /app/dist /usr/share/nginx/html
 
+# Expose port 4200
 EXPOSE 80
 
+# Start the Angular development server
 CMD ["nginx", "-g", "daemon off;"]

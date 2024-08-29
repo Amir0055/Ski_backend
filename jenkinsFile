@@ -25,22 +25,23 @@ pipeline{
                 steps {
                  sh 'mvn test'
         }
-}
+        }
          stage('MVN Install') {
             steps {
             sh 'mvn install'
             }
 }
-    stage('MVN SONARQUBE') {
+stage('MVN SONARQUBE') {
             steps{
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.1.21:9000'
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar -Dsonar.host.url=http://192.168.33.27:9000'
             }
         }
-      stage('MVN Nexus') {
+
+     /* stage('MVN Nexus') {
             steps{
                 sh 'mvn deploy -DskipTests'
         }
-}
+}*/
     stage('Build Docker Image Backend') {
             steps {
                     sh "docker build -t amir005/backend ."
@@ -59,7 +60,29 @@ pipeline{
                     }
 }
 
-        stage('Start Docker Compose') {
+//Front
+/*stage('Docker Image Build - Frontend') {
+            steps {
+                script {
+                     dir('FrontSki') {
+                    sh "docker build -t amir005/backend:frontApp ."
+                }
+                    
+                }
+            }
+        }
+ stage('Push Docker Image') {
+    steps {
+        script {
+           sh 'docker login -u amir005 -p amir55619255'
+            dir('FrontSki') {
+                sh 'docker push amir005/backend:frontApp'
+            }
+        }
+    }
+}
+*/
+  stage('Start Docker Compose') {
             steps {
                     sh 'docker compose up -d'
                 }
@@ -69,5 +92,21 @@ pipeline{
                     sh 'docker compose ps'
                 }
             }
+    }
+post {
+        success {
+            emailext (
+                subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                body: "The build ${currentBuild.fullDisplayName} has completed successfully.",
+                to: 'zaafouri.amir@esprit.tn' // Replace with the recipient's email address
+            )
+        }
+        failure {
+            emailext (
+                subject: "Build Failed: ${currentBuild.fullDisplayName}",
+                body: "The build ${currentBuild.fullDisplayName} has failed.",
+                to: 'zaafouri.amir@esprit.tn' // Replace with the recipient's email address
+            )
+        }
     }
 }
