@@ -1,0 +1,79 @@
+# General
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Node.js
+node_modules/
+package-lock.json
+yarn.lock
+
+# Angular
+/dist/
+.angular/
+coverage/
+
+# Spring Boot
+*.log
+*.jar
+*.war
+target/
+
+# Docker
+!Dockerfile
+!docker-compose.yml
+# Exclude local override file if used
+# docker-compose.override.yml
+
+# Jenkins
+# Ensure Jenkins files are included
+!jenkins/
+!*.jenkins
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Maven
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+build/
+
+# General IDEs
+*.idea/
+*.classpath
+*.project
+*.settings/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Git
+.gitignore
+
+# Exclude files that should not be in version control
+*.env
+*.private
